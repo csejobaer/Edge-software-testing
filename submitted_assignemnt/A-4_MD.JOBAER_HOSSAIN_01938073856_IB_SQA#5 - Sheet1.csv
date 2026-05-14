@@ -1,0 +1,43 @@
+Test Case ID,Page,Field/Feature,Edge Case Scenario,Test Input,Expected Result
+FB-CA-001,Create Account,First Name,Empty input,"""""",Validation message shown
+FB-CA-002,Create Account,First Name,Only spaces,""" """,Input rejected
+FB-CA-003,Create Account,First Name,Very long text,256+ characters,Error or max length restriction
+FB-CA-004,Create Account,First Name,Numeric input,"""123456""",Validation error
+FB-CA-005,Create Account,First Name,Special characters only,"""@#$%^""",Validation error
+FB-CA-006,Create Account,First Name,Unicode characters,"""জোবায়ের """,Accepted if supported
+FB-CA-007,Create Account,Last Name,SQL Injection attempt,"""' OR '1'='1""","Input sanitized, no crash"
+FB-CA-008,Create Account,Last Name,XSS script,"""<script>alert(1)</script>""",Script not executed
+FB-CA-009,Create Account,Mobile/Email,Empty input,"""""",Validation message
+FB-CA-010,Create Account,Mobile/Email,Invalid email format,"""abc@com""",Error shown
+FB-CA-011,Create Account,Mobile/Email,Email without @,"""testgmail.com""",Validation error
+FB-CA-012,Create Account,Mobile/Email,Duplicate email,Existing registered email,Registration blocked
+FB-CA-013,Create Account,Mobile/Email,Extremely long email,320+ chars,Error displayed
+FB-CA-014,Create Account,Mobile/Email,Phone with letters,"""017ABCD123""",Validation error
+FB-CA-015,Create Account,Password,Empty password,"""""",Validation error
+FB-CA-016,Create Account,Password,Very short password,"""12""",Weak password warning
+FB-CA-017,Create Account,Password,Very long password,500+ chars,Handled safely
+FB-CA-018,Create Account,Password,Spaces only,""" """,Rejected
+FB-CA-019,Create Account,Password,Common password,"""password123""",Weak password warning
+FB-CA-020,Create Account,Password,Special characters mix,"""P@$$w0rd!#""",Accepted
+FB-CA-021,Create Account,Date of Birth,Future date,01/01/2100,Validation error
+FB-CA-022,Create Account,Date of Birth,Age below limit,13 years old DOB,Account creation blocked
+FB-CA-023,Create Account,Date of Birth,Leap year date,29/02/2024,Accepted
+FB-CA-024,Create Account,Gender,No selection,None selected,Validation prompt
+FB-CA-025,Create Account,Submit Button,Double click rapidly,Multiple clicks,Single account created
+FB-CA-026,Create Account,Network,Slow internet,Simulated slow network,Proper loading handling
+FB-CA-027,Create Account,Session,Refresh during signup,Browser refresh,No corrupted session
+FB-LG-001,Login,Email/Phone,Empty input,"""""",Validation error
+FB-LG-002,Login,Email/Phone,Unregistered email,"""fakeuser@test.com""",Login failed message
+FB-LG-003,Login,Email/Phone,SQL Injection,"""' OR '1'='1""",No unauthorized access
+FB-LG-004,Login,Email/Phone,XSS payload,"""<script>alert(1)</script>""",Script blocked
+FB-LG-005,Login,Password,Empty password,"""""",Validation error
+FB-LG-006,Login,Password,Incorrect password,"""wrongpass123""",Login denied
+FB-LG-007,Login,Password,Case sensitivity check,"""Password"" vs ""password""",Correct validation
+FB-LG-008,Login,Password,Very long password,1000 chars,Safe handling
+FB-LG-009,Login,Login Button,Multiple rapid clicks,Double/triple click,Single login request
+FB-LG-010,Login,Session,Browser back after logout,Press back button,Session remains logged out
+FB-LG-011,Login,Security,Too many failed attempts,20 wrong logins,CAPTCHA or temporary block
+FB-LG-012,Login,Remember Me,Shared device login,Enable remember me,Secure persistence
+FB-LG-013,Login,Browser Compatibility,Unsupported browser,Old browser version,Proper warning/handling
+FB-LG-014,Login,Network,Disconnect during login,Internet off mid-request,Retry/error message
+FB-LG-015,Login,Accessibility,Paste disabled/enabled,Paste password,Works according to policy
